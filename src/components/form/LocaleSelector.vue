@@ -12,10 +12,12 @@ function onChange() {
 const emit = defineEmits(['localeFilter'])
 </script>
 <template>
-  <label class="form-label lead">Langue</label>
-  <select class="form-select mx-2" @change="onChange()" v-model="localeFilter">
-    <option v-for="locale in this.availableLocales">{{ locale }}</option>
-  </select>
+  <div class="container d-flex flex-column">
+    <label class="form-label lead">Langue</label>
+    <select class="form-select mx-2" @change="onChange()" v-model="localeFilter">
+      <option v-for="locale in this.availableLocales">{{ locale }}</option>
+    </select>
+  </div>
 </template>
 <script>
 export default {

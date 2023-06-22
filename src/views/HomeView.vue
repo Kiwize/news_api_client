@@ -2,8 +2,9 @@
 import { Configuration } from '../script/Config'
 import { Bootstrap5Pagination as pagination } from 'laravel-vue-pagination'
 import LoadingScreen from '../components/LoadingScreen.vue'
-import ResultsPerPageSelector from '../components/form/ResultsPerPageSelector.vue'
+import ResultsSelector from '../components/form/ResultsSelector.vue'
 import LocaleSelector from '../components/form/LocaleSelector.vue'
+import ResultsPerPageSelector from '../components/form/ResultsPerPageSelector.vue'
 import TableData from '../components/TableData.vue'
 import axios from 'axios'
 </script>
@@ -21,6 +22,7 @@ import axios from 'axios'
     </div>
     <div class="container w-75 d-flex flex-row justify-content-center">
       <LocaleSelector @locale-filter="onLocaleFilterChange" />
+      <ResultsSelector @results="onResultsChange" />
       <ResultsPerPageSelector @results-per-page="onResultsPerPageChange" />
     </div>
     <div class="container">
@@ -35,6 +37,7 @@ export default {
       isShown: false,
       localeFilter: 'fr',
       currentPage: 1,
+      results: 20,
       resultsPerPage: 20,
       currentData: {}
     }
@@ -45,13 +48,17 @@ export default {
       this.currentPage = page
       const url =
         Configuration.URL +
-        `/api/articles?page=${page}&localeFilter=${this.localeFilter}&results=${this.resultsPerPage}`
+        `/api/articles?page=${page}&localeFilter=${this.localeFilter}&results=${this.results}&resultsPerPage=${this.resultsPerPage}`
       axios.get(url).then((res) => {
         this.currentData = res.data
       })
     },
     onLocaleFilterChange(locale) {
       this.localeFilter = locale.value
+      this.getResults(this.currentPage)
+    },
+    onResultsChange(results) {
+      this.results = results.value
       this.getResults(this.currentPage)
     },
     onResultsPerPageChange(resultsPerPage) {

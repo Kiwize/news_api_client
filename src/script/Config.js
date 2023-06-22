@@ -1,6 +1,7 @@
 const URL = "http://localhost:8700";
 const DEFAULT_LOCALE = "fr"
 const RESULTS_PER_PAGE = 20
+const RESULTS = 20
 
 export class Configuration {
     static get URL() {
@@ -13,5 +14,9 @@ export class Configuration {
 
     static get RESULTS_PER_PAGE() {
         return RESULTS_PER_PAGE;
+    }
+
+    static get RESULTS() {
+        return RESULTS
     }
 }
