@@ -2,8 +2,10 @@
 import { Configuration } from '../script/Config'
 import { Bootstrap5Pagination as pagination } from 'laravel-vue-pagination'
 import LoadingScreen from '../components/LoadingScreen.vue'
+import ResultsPerPageSelector from '../components/form/ResultsPerPageSelector.vue'
+import LocaleSelector from '../components/form/LocaleSelector.vue'
+import TableData from '../components/TableData.vue'
 import axios from 'axios'
-
 </script>
 
 <template>
@@ -11,25 +13,18 @@ import axios from 'axios'
   <main>
     <h2 class="h2 text-center mt-3">Les dernières parutions</h2>
     <div>
-      <pagination class="d-flex flex-rox justify-content-center" :data="currentData" @pagination-change-page="getResults($event)"></pagination>
+      <pagination
+        class="d-flex flex-rox justify-content-center"
+        :data="currentData"
+        @pagination-change-page="getResults($event)"
+      ></pagination>
+    </div>
+    <div class="container w-75 d-flex flex-row justify-content-center">
+      <LocaleSelector @locale-filter="onLocaleFilterChange" />
+      <ResultsPerPageSelector @results-per-page="onResultsPerPageChange" />
     </div>
     <div class="container">
-      <table class="table table-responsive-md table-striped">
-        <thead>
-          <th scope="col">Titre</th>
-          <th scope="col">Langue</th>
-          <th scope="col">Date de publication</th>
-          <th scope="col"></th>
-        </thead>
-        <tbody>
-          <tr v-for="article in currentData.data">
-            <th scope="row" class="lead">{{ article.title }}</th>
-            <td class="lead">{{ article.summary_detail.language }}</td>
-            <td>{{ article.author_detail.published }}</td>
-            <td><img id="author_logo" v-bind:src="article.author" /></td>
-          </tr>
-        </tbody>
-      </table>
+      <TableData :current-data="currentData" />
     </div>
   </main>
 </template>
@@ -38,16 +33,30 @@ export default {
   data() {
     return {
       isShown: false,
+      localeFilter: 'fr',
+      currentPage: 1,
+      resultsPerPage: 20,
       currentData: {}
     }
   },
   methods: {
     getResults(currentPage) {
       const page = currentPage ? currentPage : 1
-      const url = Configuration.URL + `/api/articles?page=${page}`
+      this.currentPage = page
+      const url =
+        Configuration.URL +
+        `/api/articles?page=${page}&localeFilter=${this.localeFilter}&results=${this.resultsPerPage}`
       axios.get(url).then((res) => {
         this.currentData = res.data
       })
+    },
+    onLocaleFilterChange(locale) {
+      this.localeFilter = locale.value
+      this.getResults(this.currentPage)
+    },
+    onResultsPerPageChange(resultsPerPage) {
+      this.resultsPerPage = resultsPerPage.value
+      this.getResults(this.currentPage)
     }
   },
   mounted() {
