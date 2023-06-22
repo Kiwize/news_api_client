@@ -2610,6 +2610,13 @@
   "resolved" "https://registry.npmjs.org/knitwork/-/knitwork-1.0.0.tgz"
   "version" "1.0.0"
 
+"laravel-vue-pagination@^4.1.0":
+  "integrity" "sha512-t5+AMnEe7Q6CzZrAwLBULeoLjg07cChyDCZneytzrLmiGASkj7c0cX65dnXbp8o52bXmkTsJQV6f8z2mh7FRLw=="
+  "resolved" "https://registry.npmjs.org/laravel-vue-pagination/-/laravel-vue-pagination-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "vue" "^3.2.47"
+
 "levn@^0.4.1":
   "integrity" "sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ=="
   "resolved" "https://registry.npmjs.org/levn/-/levn-0.4.1.tgz"
@@ -4193,7 +4200,7 @@
   dependencies:
     "@vue/devtools-api" "^6.5.0"
 
-"vue@^2.6.14 || ^3.3.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.0.1", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.45", "vue@^3.3.4", "vue@3.3.4":
+"vue@^2.6.14 || ^3.3.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.0.1", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.45", "vue@^3.2.47", "vue@^3.3.4", "vue@3.3.4":
   "integrity" "sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.3.4.tgz"
   "version" "3.3.4"
