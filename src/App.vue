@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Loading from './components/LoadingScreen.vue'
 </script>
 
 <template>
